@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block style %}
+  .spinner {
+    width: 22px; height: 22px; border-radius: 50%;
+    border: 3px solid var(--hairline); border-top-color: var(--accent);
+    animation: spin 0.9s linear infinite; display: inline-block; vertical-align: middle;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #msg { font-size: 15px; }
+{% endblock %}
+{% block content %}
+<div class="card" style="text-align:center; padding: 48px 24px;">
+  {% if job.status == "error" %}
+    <h2 style="margin-top:0">Analysis failed</h2>
+    <p class="chip critical" style="justify-content:center"><span class="dot"></span> Error</p>
+    <p class="secondary">{{ job.error }}</p>
+    <p><a class="btn ghost" href="{{ url_for('index') }}">Back to start</a></p>
+  {% else %}
+    <h2 style="margin-top:0">Analyzing {{ job.files|length }} policy document(s)
+      {% if job.org.name %}for {{ job.org.name }}{% endif %}</h2>
+    <p><span class="spinner"></span></p>
+    <p id="msg" class="secondary">{{ job.message }}</p>
+    <p class="muted">Deep analysis can take several minutes per policy. This page updates automatically.</p>
+  {% endif %}
+</div>
+{% if job.status not in ("error", "done") %}
+<script>
+  async function poll() {
+    try {
+      const r = await fetch("{{ url_for('job_status', job_id=job.id) }}");
+      const j = await r.json();
+      document.getElementById("msg").textContent = j.message;
+      if (j.status === "done") { window.location = "{{ url_for('results', job_id=job.id) }}"; return; }
+      if (j.status === "error") { window.location = "{{ url_for('progress', job_id=job.id) }}"; return; }
+    } catch (e) { /* transient; keep polling */ }
+    setTimeout(poll, 2000);
+  }
+  setTimeout(poll, 2000);
+</script>
+{% endif %}
+{% endblock %}

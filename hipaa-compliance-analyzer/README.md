@@ -33,7 +33,25 @@ pip install python-docx pypdf
 export ANTHROPIC_API_KEY=sk-ant-...
 ```
 
-## Usage
+## Usage — Web GUI
+
+```bash
+python -m hipaa_analyzer.web            # then open http://127.0.0.1:5000/
+```
+
+The GUI lets you:
+
+1. **Enter the organization's info** — name, type (hospital, practice, health plan, …), and contact person.
+2. **Upload policies** — drag-and-drop or file picker, any mix of `.md`, `.txt`, `.docx`, `.pdf`.
+3. **Provide the API key** — entered per-run in the form (held in memory only, never written to disk), or omitted if `ANTHROPIC_API_KEY` is set in the server environment.
+4. **Watch progress** — a live status page updates as each policy is analyzed.
+5. **Browse results** — a dashboard with coverage stat tiles, a coverage bar, missing/partial requirement tables grouped by rule, combined-coverage verification list, contradictions ordered by severity with excerpts and recommendations, the full coverage matrix, and per-policy detail — plus download buttons for the Markdown report and raw JSON.
+
+Options: `python -m hipaa_analyzer.web --host 0.0.0.0 --port 8080` to serve on your network. Jobs live for the duration of the server process; the report and JSON are also written to the job's temp directory.
+
+> Note: uploaded policies are sent to the Anthropic API for analysis. Policy documents are generally not PHI, but review your organization's vendor/data-handling requirements before uploading anything sensitive.
+
+## Usage — CLI
 
 Put all of the organization's policies in one directory (`.md`, `.txt`, `.docx`, `.pdf`), then:
 

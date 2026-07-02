@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+{% block title %}Results — {{ job.org.name or "HIPAA Analysis" }}{% endblock %}
+{% block style %}
+  .meta { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: var(--text-muted); }
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  @media (max-width: 760px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
+  .tile {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .tile .value { font-size: 32px; font-weight: 700; color: var(--text-primary); line-height: 1.1; }
+  .tile .of { font-size: 14px; font-weight: 400; color: var(--text-muted); }
+  .tile .chip { margin-top: 6px; }
+  /* stacked coverage bar: 2px surface gaps between segments */
+  .covbar { display: flex; height: 22px; border-radius: 6px; overflow: hidden; gap: 2px; background: var(--surface-1); }
+  .covbar .seg.good    { background: var(--status-good); }
+  .covbar .seg.warning { background: var(--status-warning); }
+  .covbar .seg.serious { background: var(--status-serious); }
+  .legend { display: flex; gap: 20px; margin-top: 10px; flex-wrap: wrap; }
+  .sevband { border-left: 4px solid var(--hairline); padding-left: 14px; margin: 14px 0; }
+  .sevband.critical { border-left-color: var(--status-critical); }
+  .sevband.serious  { border-left-color: var(--status-serious); }
+  .sevband.warning  { border-left-color: var(--status-warning); }
+  blockquote {
+    margin: 6px 0; padding: 6px 12px; border-left: 3px solid var(--hairline);
+    color: var(--text-secondary); font-size: 13.5px;
+  }
+  details { border-top: 1px solid var(--hairline); padding: 10px 0; }
+  details summary { cursor: pointer; font-weight: 600; font-size: 14px; }
+  .tag { display:inline-block; font-size: 11.5px; border: 1px solid var(--border); border-radius: 999px; padding: 1px 9px; margin: 0 4px 4px 0; color: var(--text-secondary); }
+  .rule-h { margin-top: 22px; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); }
+{% endblock %}
+{% block content %}
+
+<div class="card">
+  <h2 style="margin-top:0">Gap analysis{% if job.org.name %} — {{ job.org.name }}{% endif %}</h2>
+  <div class="meta">
+    {% if job.org.org_type %}<span>{{ job.org.org_type }}</span>{% endif %}
+    {% if job.org.contact_name %}<span>Contact: {{ job.org.contact_name }}{% if job.org.contact_email %} ({{ job.org.contact_email }}){% endif %}</span>{% endif %}
+    <span>{{ job.created_at.strftime("%B %d, %Y %H:%M") }}</span>
+    <span>{{ result.policies|length }} policies</span>
+    <span>Model: {{ result.model }}</span>
+    <span>Knowledge base v{{ result.knowledge_base_version }}</span>
+  </div>
+  <div style="margin-top:14px">
+    <a class="btn ghost" href="{{ url_for('download', job_id=job.id, kind='report') }}">Download report (.md)</a>
+    <a class="btn ghost" href="{{ url_for('download', job_id=job.id, kind='json') }}">Download raw results (.json)</a>
+    <a class="btn ghost" href="{{ url_for('index') }}">New analysis</a>
+  </div>
+</div>
+
+<div class="tiles">
+  <div class="tile">
+    <div class="value">{{ stats.covered }} <span class="of">/ {{ stats.total }}</span></div>
+    <div class="chip good"><span class="dot"></span> Covered</div>
+  </div>
+  <div class="tile">
+    <div class="value">{{ stats.partial }} <span class="of">/ {{ stats.total }}</span></div>
+    <div class="chip warning"><span class="dot"></span> Partially covered</div>
+  </div>
+  <div class="tile">
+    <div class="value">{{ stats.missing }} <span class="of">/ {{ stats.total }}</span></div>
+    <div class="chip serious"><span class="dot"></span> Missing</div>
+  </div>
+  <div class="tile">
+    <div class="value">{{ contradictions|length }}</div>
+    <div class="chip {{ 'critical' if contradictions else 'good' }}"><span class="dot"></span> Contradictions</div>
+  </div>
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">Requirement coverage</h3>
+  <div class="covbar" role="img"
+       aria-label="Coverage: {{ stats.covered }} covered, {{ stats.partial }} partial, {{ stats.missing }} missing of {{ stats.total }}">
+    {% if stats.covered %}<div class="seg good" style="flex:{{ stats.covered }}"></div>{% endif %}
+    {% if stats.partial %}<div class="seg warning" style="flex:{{ stats.partial }}"></div>{% endif %}
+    {% if stats.missing %}<div class="seg serious" style="flex:{{ stats.missing }}"></div>{% endif %}
+  </div>
+  <div class="legend">
+    <span class="chip good"><span class="dot"></span> Covered · {{ stats.covered }}</span>
+    <span class="chip warning"><span class="dot"></span> Partial · {{ stats.partial }}</span>
+    <span class="chip serious"><span class="dot"></span> Missing · {{ stats.missing }}</span>
+  </div>
+</div>
+
+<h2>❌ Missing requirements ({{ missing|length }})</h2>
+<div class="card">
+  {% if not missing %}
+    <p class="secondary" style="margin:0">None — every requirement is addressed by at least one policy.</p>
+  {% else %}
+    <p class="secondary" style="margin-top:0">No uploaded policy addresses these requirements. Each needs a new policy or an addition to an existing one.</p>
+    {% for rule_key, rule_label in rule_names.items() %}
+      {% set rows = missing | selectattr("rule", "equalto", rule_key) | list %}
+      {% if rows %}
+        <div class="rule-h">{{ rule_label }}</div>
+        <table>
+          <tr><th style="width:190px">Citation</th><th>Requirement</th><th style="width:110px">Type</th><th>Category</th></tr>
+          {% for c in rows %}
+          <tr><td>§{{ c.citation }}</td><td>{{ c.title }}</td><td>{{ c.type }}</td><td>{{ c.category }}</td></tr>
+          {% endfor %}
+        </table>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+</div>
+
+<h2>🟡 Partially addressed ({{ partial|length }})</h2>
+<div class="card">
+  {% if not partial %}
+    <p class="secondary" style="margin:0">None.</p>
+  {% else %}
+    {% for c in partial %}
+      <div style="padding:10px 0; border-bottom:1px solid var(--hairline)">
+        <strong>§{{ c.citation }} — {{ c.title }}</strong>
+        <span class="muted">({{ c.type }}, {{ c.category }})</span>
+        {% for contrib in c.contributions %}
+          <div class="secondary" style="margin-top:4px">Addressed only in <strong>{{ contrib.policy }}</strong>: {{ contrib.notes }}</div>
+          <blockquote>“{{ contrib.evidence }}”</blockquote>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+
+{% if combined %}
+<h2>⚠ Combined coverage — verify completeness ({{ combined|length }})</h2>
+<div class="card">
+  <p class="secondary" style="margin-top:0">These requirements are only covered by combining partial coverage from multiple policies. Verify the pieces together are complete.</p>
+  <table>
+    <tr><th style="width:190px">Citation</th><th>Requirement</th><th>Contributing policies</th></tr>
+    {% for c in combined %}
+    <tr>
+      <td>§{{ c.citation }}</td>
+      <td>{{ c.title }}</td>
+      <td>{% for contrib in c.contributions %}<div><strong>{{ contrib.policy }}</strong> <span class="muted">— {{ contrib.notes }}</span></div>{% endfor %}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
+
+<h2>Contradictions between policies ({{ contradictions|length }})</h2>
+<div class="card">
+  {% if not contradictions %}
+    <p class="chip good" style="margin:0"><span class="dot"></span> None detected</p>
+  {% else %}
+    {% for c in contradictions %}
+      {% set sev = {'high': 'critical', 'medium': 'serious', 'low': 'warning'}[c.severity] %}
+      <div class="sevband {{ sev }}">
+        <span class="chip {{ sev }}"><span class="dot"></span> {{ c.severity|upper }}</span>
+        <strong style="margin-left:8px">{{ c.topic }}</strong>
+        <div class="secondary" style="margin-top:4px">{{ c.description }}</div>
+        <blockquote><strong>{{ c.policy_a }}:</strong> “{{ c.excerpt_a }}”</blockquote>
+        <blockquote><strong>{{ c.policy_b }}:</strong> “{{ c.excerpt_b }}”</blockquote>
+        <div style="font-size:13.5px"><strong>Recommendation:</strong> {{ c.recommendation }}</div>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+
+<h2>Full coverage matrix</h2>
+<div class="card">
+  {% for rule_key, rule_label in rule_names.items() %}
+    {% set rows = result.coverage | selectattr("rule", "equalto", rule_key) | list %}
+    {% if rows %}
+      <div class="rule-h">{{ rule_label }}</div>
+      <table>
+        <tr><th style="width:130px">Status</th><th style="width:180px">Citation</th><th>Requirement</th><th style="width:105px">Type</th><th>Addressed in</th></tr>
+        {% for c in rows %}
+        <tr>
+          <td>
+            {% if c.status == 'covered' %}<span class="chip good"><span class="dot"></span> Covered</span>
+            {% elif c.status == 'partial' %}<span class="chip warning"><span class="dot"></span> Partial</span>
+            {% else %}<span class="chip serious"><span class="dot"></span> Missing</span>{% endif %}
+          </td>
+          <td>§{{ c.citation }}</td>
+          <td>{{ c.title }}</td>
+          <td>{{ c.type }}</td>
+          <td>{% if c.contributions %}{% for contrib in c.contributions %}{{ contrib.policy }} ({{ contrib.coverage }}){% if not loop.last %}; {% endif %}{% endfor %}{% else %}—{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+  {% endfor %}
+</div>
+
+<h2>Per-policy detail</h2>
+<div class="card">
+  {% for name, analysis in result.policies.items() %}
+  <details {% if loop.first %}open{% endif %}>
+    <summary>{{ name }} <span class="muted">— {{ analysis.citations_addressed|length }} requirement(s) mapped</span></summary>
+    <p class="secondary">{{ analysis.policy_summary }}</p>
+    <div>{% for t in analysis.topics %}<span class="tag">{{ t }}</span>{% endfor %}</div>
+    {% if analysis.citations_addressed %}
+    <table style="margin-top:10px">
+      <tr><th style="width:180px">Citation</th><th style="width:90px">Coverage</th><th>Notes</th></tr>
+      {% for m in analysis.citations_addressed %}
+      <tr><td>§{{ m.citation }}</td><td>{{ m.coverage }}</td><td>{{ m.notes }}</td></tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+    {% if analysis.internal_issues %}
+    <div style="margin-top:10px"><span class="chip serious"><span class="dot"></span> Internal issues</span>
+      <ul style="font-size:13.5px">{% for issue in analysis.internal_issues %}<li>{{ issue }}</li>{% endfor %}</ul>
+    </div>
+    {% endif %}
+  </details>
+  {% endfor %}
+</div>
+
+<p class="muted">This report was generated by automated analysis and is an aid to — not a substitute for —
+review by a qualified HIPAA compliance professional or counsel.</p>
+{% endblock %}

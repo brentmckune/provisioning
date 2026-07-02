@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% block style %}
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 700px) { .grid2 { grid-template-columns: 1fr; } }
+  label { display: block; font-size: 13px; font-weight: 600; margin: 12px 0 4px; }
+  input[type=text], input[type=email], input[type=password], select {
+    width: 100%; font: inherit; padding: 9px 11px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--page); color: var(--text-primary);
+  }
+  .dropzone {
+    border: 1.5px dashed var(--hairline); border-radius: 10px;
+    padding: 26px; text-align: center; margin-top: 12px; cursor: pointer;
+  }
+  .dropzone.drag { border-color: var(--accent); }
+  #filelist { list-style: none; padding: 0; margin: 10px 0 0; font-size: 13.5px; }
+  #filelist li { padding: 4px 0; border-bottom: 1px solid var(--hairline); }
+  .inline { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
+{% endblock %}
+{% block content %}
+<div class="card">
+  <h2 style="margin-top:0">Run a compliance analysis</h2>
+  <p class="secondary" style="font-size:14px">
+    Upload your organization's policies and procedures. They will be cross-referenced against
+    <strong>{{ kb_count }} HIPAA requirements</strong> (Privacy, Security, and Breach Notification Rules),
+    including requirements whose coverage is split across multiple policies, and checked for
+    contradictions between policies.
+  </p>
+
+  <form method="post" action="{{ url_for('analyze') }}" enctype="multipart/form-data" id="analyzeForm">
+    <h3>Organization</h3>
+    <div class="grid2">
+      <div>
+        <label for="org_name">Organization name</label>
+        <input type="text" id="org_name" name="org_name" placeholder="Example Health Clinic" required>
+      </div>
+      <div>
+        <label for="org_type">Organization type</label>
+        <select id="org_type" name="org_type">
+          <option value="">— select —</option>
+          <option>Hospital</option>
+          <option>Physician practice</option>
+          <option>Dental practice</option>
+          <option>Behavioral health</option>
+          <option>Health plan</option>
+          <option>Business associate</option>
+          <option>Other covered entity</option>
+        </select>
+      </div>
+      <div>
+        <label for="contact_name">Contact person</label>
+        <input type="text" id="contact_name" name="contact_name" placeholder="Jane Smith">
+      </div>
+      <div>
+        <label for="contact_email">Contact email</label>
+        <input type="email" id="contact_email" name="contact_email" placeholder="jane@example.com">
+      </div>
+    </div>
+
+    <h3>Policies &amp; procedures</h3>
+    <div class="dropzone" id="dropzone">
+      <input type="file" id="policies" name="policies" multiple
+             accept="{{ supported|join(',') }}" style="display:none">
+      <div><strong>Click to choose files</strong> or drag &amp; drop</div>
+      <div class="muted">Supported: {{ supported|join(', ') }}</div>
+      <ul id="filelist"></ul>
+    </div>
+
+    <h3>Analysis settings</h3>
+    <div class="grid2">
+      <div>
+        <label for="api_key">Anthropic API key
+          {% if has_env_key %}<span class="muted">(optional — a key was found in the server environment)</span>
+          {% else %}<span class="muted">(required)</span>{% endif %}
+        </label>
+        <input type="password" id="api_key" name="api_key" placeholder="sk-ant-..."
+               autocomplete="off" {% if not has_env_key %}required{% endif %}>
+        <div class="muted" style="margin-top:4px">Used only for this run; never written to disk.</div>
+      </div>
+      <div>
+        <label for="model">Model</label>
+        <select id="model" name="model">
+          <option value="claude-opus-4-8" {% if default_model == 'claude-opus-4-8' %}selected{% endif %}>claude-opus-4-8 (recommended)</option>
+          <option value="claude-sonnet-5">claude-sonnet-5 (faster / cheaper)</option>
+        </select>
+      </div>
+    </div>
+    <div class="inline">
+      <label style="margin:0; font-weight:400"><input type="checkbox" name="skip_contradictions"> Skip cross-policy contradiction scan</label>
+    </div>
+
+    <div style="margin-top:20px">
+      <button type="submit" id="submitBtn">Analyze policies</button>
+    </div>
+  </form>
+</div>
+
+{% if recent_jobs %}
+<div class="card">
+  <h3 style="margin-top:0">Recent analyses (this server session)</h3>
+  <table>
+    <tr><th>Organization</th><th>Files</th><th>Started</th><th>Status</th><th></th></tr>
+    {% for j in recent_jobs %}
+    <tr>
+      <td>{{ j.org.name or "—" }}</td>
+      <td class="num">{{ j.files|length }}</td>
+      <td>{{ j.created_at.strftime("%Y-%m-%d %H:%M") }}</td>
+      <td>{{ j.status }}</td>
+      <td><a href="{{ url_for('progress', job_id=j.id) }}">open</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
+
+<script>
+  const dz = document.getElementById("dropzone");
+  const input = document.getElementById("policies");
+  const list = document.getElementById("filelist");
+  function renderList(files) {
+    list.innerHTML = "";
+    for (const f of files) {
+      const li = document.createElement("li");
+      li.textContent = `${f.name} (${(f.size/1024).toFixed(0)} KB)`;
+      list.appendChild(li);
+    }
+  }
+  dz.addEventListener("click", () => input.click());
+  input.addEventListener("change", () => renderList(input.files));
+  dz.addEventListener("dragover", e => { e.preventDefault(); dz.classList.add("drag"); });
+  dz.addEventListener("dragleave", () => dz.classList.remove("drag"));
+  dz.addEventListener("drop", e => {
+    e.preventDefault(); dz.classList.remove("drag");
+    input.files = e.dataTransfer.files;
+    renderList(input.files);
+  });
+  document.getElementById("analyzeForm").addEventListener("submit", e => {
+    if (!input.files.length) { e.preventDefault(); alert("Please choose at least one policy file."); return; }
+    const btn = document.getElementById("submitBtn");
+    btn.disabled = true; btn.textContent = "Uploading…";
+  });
+</script>
+{% endblock %}

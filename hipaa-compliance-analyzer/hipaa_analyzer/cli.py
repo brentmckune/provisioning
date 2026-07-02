@@ -11,11 +11,11 @@ import json
 import sys
 from pathlib import Path
 
-from .aggregator import aggregate_coverage, coverage_stats
-from .analyzer import DEFAULT_MODEL, Analyzer
+from .aggregator import coverage_stats
+from .analyzer import DEFAULT_MODEL
 from .ingestion import IngestionError, load_directory
 from .knowledge_base import KnowledgeBase
-from .models import AnalysisResult
+from .pipeline import run_analysis
 from .report import render_markdown
 
 
@@ -66,26 +66,12 @@ def cmd_analyze(args: argparse.Namespace) -> int:
         note = " (truncated — exceeded size limit)" if d.truncated else ""
         print(f"  - {d.name} ({len(d.text):,} chars){note}")
 
-    analyzer = Analyzer(kb, model=args.model)
-
-    analyses = {}
-    for i, doc in enumerate(docs, 1):
-        print(f"[{i}/{len(docs)}] Analyzing {doc.name} ...")
-        analyses[doc.name] = analyzer.analyze_policy(doc)
-
-    if args.skip_contradictions or len(docs) < 2:
-        contradictions = []
-    else:
-        print("Scanning for cross-policy contradictions ...")
-        contradictions = analyzer.find_contradictions(docs).contradictions
-
-    coverage = aggregate_coverage(kb, analyses)
-    result = AnalysisResult(
-        policies=analyses,
-        coverage=coverage,
-        contradictions=contradictions,
-        knowledge_base_version=kb.version,
+    result = run_analysis(
+        docs,
+        kb=kb,
         model=args.model,
+        skip_contradictions=args.skip_contradictions,
+        progress=lambda msg: print(f"... {msg}"),
     )
 
     report_md = render_markdown(result, org_name=args.org)
@@ -98,11 +84,11 @@ def cmd_analyze(args: argparse.Namespace) -> int:
         )
         print(f"Raw results written to {args.json_output}")
 
-    stats = coverage_stats(coverage)
+    stats = coverage_stats(result.coverage)
     print(
         f"\nSummary: {stats['covered']} covered / {stats['partial']} partial / "
         f"{stats['missing']} missing of {stats['total']} requirements; "
-        f"{len(contradictions)} contradiction(s)."
+        f"{len(result.contradictions)} contradiction(s)."
     )
     return 0
 
