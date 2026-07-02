@@ -1,0 +1,852 @@
+{
+  "version": "2024.1",
+  "description": "HIPAA regulation knowledge base: Privacy Rule (45 CFR Part 164 Subpart E), Security Rule (Subpart C), and Breach Notification Rule (Subpart D). Each entry is a requirement a covered entity's policies and procedures are expected to address.",
+  "requirements": [
+    {
+      "citation": "164.308(a)(1)(i)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Security Management Process",
+      "type": "required",
+      "summary": "Implement policies and procedures to prevent, detect, contain, and correct security violations.",
+      "keywords": ["security management", "security program", "security violations"]
+    },
+    {
+      "citation": "164.308(a)(1)(ii)(A)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Risk Analysis",
+      "type": "required",
+      "summary": "Conduct an accurate and thorough assessment of the potential risks and vulnerabilities to the confidentiality, integrity, and availability of ePHI held by the organization.",
+      "keywords": ["risk analysis", "risk assessment", "vulnerabilities", "threats"]
+    },
+    {
+      "citation": "164.308(a)(1)(ii)(B)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Risk Management",
+      "type": "required",
+      "summary": "Implement security measures sufficient to reduce risks and vulnerabilities to a reasonable and appropriate level.",
+      "keywords": ["risk management", "risk mitigation", "security measures"]
+    },
+    {
+      "citation": "164.308(a)(1)(ii)(C)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Sanction Policy",
+      "type": "required",
+      "summary": "Apply appropriate sanctions against workforce members who fail to comply with the security policies and procedures of the organization.",
+      "keywords": ["sanctions", "discipline", "workforce violations", "corrective action"]
+    },
+    {
+      "citation": "164.308(a)(1)(ii)(D)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Information System Activity Review",
+      "type": "required",
+      "summary": "Implement procedures to regularly review records of information system activity, such as audit logs, access reports, and security incident tracking reports.",
+      "keywords": ["activity review", "audit logs", "access reports", "log review"]
+    },
+    {
+      "citation": "164.308(a)(2)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Assigned Security Responsibility (Security Officer)",
+      "type": "required",
+      "summary": "Identify the security official responsible for the development and implementation of the security policies and procedures.",
+      "keywords": ["security officer", "security official", "assigned responsibility", "CISO"]
+    },
+    {
+      "citation": "164.308(a)(3)(i)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Workforce Security",
+      "type": "required",
+      "summary": "Implement policies and procedures to ensure that all workforce members have appropriate access to ePHI and to prevent those who should not have access from obtaining it.",
+      "keywords": ["workforce security", "appropriate access", "workforce access"]
+    },
+    {
+      "citation": "164.308(a)(3)(ii)(A)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Authorization and/or Supervision",
+      "type": "addressable",
+      "summary": "Implement procedures for the authorization and/or supervision of workforce members who work with ePHI or in locations where it might be accessed.",
+      "keywords": ["authorization", "supervision", "workforce oversight"]
+    },
+    {
+      "citation": "164.308(a)(3)(ii)(B)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Workforce Clearance Procedure",
+      "type": "addressable",
+      "summary": "Implement procedures to determine that the access of a workforce member to ePHI is appropriate (e.g., background checks, role review before granting access).",
+      "keywords": ["clearance", "background check", "screening", "access appropriateness"]
+    },
+    {
+      "citation": "164.308(a)(3)(ii)(C)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Termination Procedures",
+      "type": "addressable",
+      "summary": "Implement procedures for terminating access to ePHI when employment or association ends, or when access is no longer appropriate.",
+      "keywords": ["termination", "offboarding", "access revocation", "deprovisioning"]
+    },
+    {
+      "citation": "164.308(a)(4)(i)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Information Access Management",
+      "type": "required",
+      "summary": "Implement policies and procedures for authorizing access to ePHI that are consistent with the Privacy Rule.",
+      "keywords": ["access management", "access authorization", "role-based access"]
+    },
+    {
+      "citation": "164.308(a)(4)(ii)(B)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Access Authorization",
+      "type": "addressable",
+      "summary": "Implement policies and procedures for granting access to ePHI, for example through access to a workstation, transaction, program, process, or other mechanism.",
+      "keywords": ["access authorization", "granting access", "access request"]
+    },
+    {
+      "citation": "164.308(a)(4)(ii)(C)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Access Establishment and Modification",
+      "type": "addressable",
+      "summary": "Implement policies and procedures that, based upon the access authorization policies, establish, document, review, and modify a user's right of access to a workstation, transaction, program, or process.",
+      "keywords": ["access modification", "access review", "access changes", "periodic review"]
+    },
+    {
+      "citation": "164.308(a)(5)(i)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Security Awareness and Training",
+      "type": "required",
+      "summary": "Implement a security awareness and training program for all members of the workforce, including management.",
+      "keywords": ["security training", "security awareness", "workforce training"]
+    },
+    {
+      "citation": "164.308(a)(5)(ii)(A)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Security Reminders",
+      "type": "addressable",
+      "summary": "Provide periodic security updates and reminders to the workforce.",
+      "keywords": ["security reminders", "periodic updates", "awareness communications"]
+    },
+    {
+      "citation": "164.308(a)(5)(ii)(B)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Protection from Malicious Software",
+      "type": "addressable",
+      "summary": "Implement procedures for guarding against, detecting, and reporting malicious software.",
+      "keywords": ["malware", "antivirus", "malicious software", "endpoint protection"]
+    },
+    {
+      "citation": "164.308(a)(5)(ii)(C)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Log-in Monitoring",
+      "type": "addressable",
+      "summary": "Implement procedures for monitoring log-in attempts and reporting discrepancies.",
+      "keywords": ["login monitoring", "failed logins", "sign-in attempts"]
+    },
+    {
+      "citation": "164.308(a)(5)(ii)(D)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Password Management",
+      "type": "addressable",
+      "summary": "Implement procedures for creating, changing, and safeguarding passwords.",
+      "keywords": ["password", "credentials", "passphrase", "password policy"]
+    },
+    {
+      "citation": "164.308(a)(6)(i)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Security Incident Procedures",
+      "type": "required",
+      "summary": "Implement policies and procedures to address security incidents.",
+      "keywords": ["security incident", "incident response", "incident handling"]
+    },
+    {
+      "citation": "164.308(a)(6)(ii)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Incident Response and Reporting",
+      "type": "required",
+      "summary": "Identify and respond to suspected or known security incidents; mitigate, to the extent practicable, harmful effects of security incidents that are known; and document security incidents and their outcomes.",
+      "keywords": ["incident response", "incident reporting", "mitigation", "incident documentation"]
+    },
+    {
+      "citation": "164.308(a)(7)(i)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Contingency Plan",
+      "type": "required",
+      "summary": "Establish (and implement as needed) policies and procedures for responding to an emergency or other occurrence (e.g., fire, vandalism, system failure, natural disaster) that damages systems containing ePHI.",
+      "keywords": ["contingency plan", "emergency", "business continuity", "disaster"]
+    },
+    {
+      "citation": "164.308(a)(7)(ii)(A)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Data Backup Plan",
+      "type": "required",
+      "summary": "Establish and implement procedures to create and maintain retrievable exact copies of ePHI.",
+      "keywords": ["backup", "data backup", "retrievable copies"]
+    },
+    {
+      "citation": "164.308(a)(7)(ii)(B)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Disaster Recovery Plan",
+      "type": "required",
+      "summary": "Establish (and implement as needed) procedures to restore any loss of data.",
+      "keywords": ["disaster recovery", "data restoration", "recovery procedures"]
+    },
+    {
+      "citation": "164.308(a)(7)(ii)(C)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Emergency Mode Operation Plan",
+      "type": "required",
+      "summary": "Establish (and implement as needed) procedures to enable continuation of critical business processes for protection of the security of ePHI while operating in emergency mode.",
+      "keywords": ["emergency mode", "critical operations", "continuity of operations"]
+    },
+    {
+      "citation": "164.308(a)(7)(ii)(D)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Testing and Revision Procedures",
+      "type": "addressable",
+      "summary": "Implement procedures for periodic testing and revision of contingency plans.",
+      "keywords": ["contingency testing", "plan testing", "tabletop exercise", "plan revision"]
+    },
+    {
+      "citation": "164.308(a)(7)(ii)(E)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Applications and Data Criticality Analysis",
+      "type": "addressable",
+      "summary": "Assess the relative criticality of specific applications and data in support of other contingency plan components.",
+      "keywords": ["criticality analysis", "critical applications", "data criticality"]
+    },
+    {
+      "citation": "164.308(a)(8)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Evaluation",
+      "type": "required",
+      "summary": "Perform periodic technical and nontechnical evaluations that establish the extent to which security policies and procedures meet the requirements of the Security Rule, in response to environmental or operational changes affecting the security of ePHI.",
+      "keywords": ["evaluation", "periodic review", "security assessment", "compliance evaluation"]
+    },
+    {
+      "citation": "164.308(b)(1)",
+      "rule": "security",
+      "category": "Administrative Safeguards",
+      "title": "Business Associate Contracts and Other Arrangements",
+      "type": "required",
+      "summary": "A covered entity may permit a business associate to create, receive, maintain, or transmit ePHI on its behalf only if satisfactory assurances are obtained, in accordance with 164.314(a), that the business associate will appropriately safeguard the information.",
+      "keywords": ["business associate", "BAA", "business associate agreement", "vendor", "satisfactory assurances"]
+    },
+    {
+      "citation": "164.310(a)(1)",
+      "rule": "security",
+      "category": "Physical Safeguards",
+      "title": "Facility Access Controls",
+      "type": "required",
+      "summary": "Implement policies and procedures to limit physical access to electronic information systems and the facilities in which they are housed, while ensuring that properly authorized access is allowed.",
+      "keywords": ["facility access", "physical access", "building security"]
+    },
+    {
+      "citation": "164.310(a)(2)(i)",
+      "rule": "security",
+      "category": "Physical Safeguards",
+      "title": "Contingency Operations (Facility)",
+      "type": "addressable",
+      "summary": "Establish (and implement as needed) procedures that allow facility access in support of restoration of lost data under the disaster recovery plan and emergency mode operations plan.",
+      "keywords": ["facility contingency", "emergency facility access"]
+    },
+    {
+      "citation": "164.310(a)(2)(ii)",
+      "rule": "security",
+      "category": "Physical Safeguards",
+      "title": "Facility Security Plan",
+      "type": "addressable",
+      "summary": "Implement policies and procedures to safeguard the facility and the equipment therein from unauthorized physical access, tampering, and theft.",
+      "keywords": ["facility security plan", "physical safeguards", "tampering", "theft"]
+    },
+    {
+      "citation": "164.310(a)(2)(iii)",
+      "rule": "security",
+      "category": "Physical Safeguards",
+      "title": "Access Control and Validation Procedures",
+      "type": "addressable",
+      "summary": "Implement procedures to control and validate a person's access to facilities based on their role or function, including visitor control and control of access to software programs for testing and revision.",
+      "keywords": ["visitor control", "badge access", "role-based facility access"]
+    },
+    {
+      "citation": "164.310(a)(2)(iv)",
+      "rule": "security",
+      "category": "Physical Safeguards",
+      "title": "Maintenance Records",
+      "type": "addressable",
+      "summary": "Implement policies and procedures to document repairs and modifications to the physical components of a facility related to security (e.g., hardware, walls, doors, locks).",
+      "keywords": ["maintenance records", "facility repairs", "physical modifications"]
+    },
+    {
+      "citation": "164.310(b)",
+      "rule": "security",
+      "category": "Physical Safeguards",
+      "title": "Workstation Use",
+      "type": "required",
+      "summary": "Implement policies and procedures that specify the proper functions to be performed, the manner in which those functions are to be performed, and the physical attributes of the surroundings of a specific workstation or class of workstation that can access ePHI.",
+      "keywords": ["workstation use", "acceptable use", "workstation policy"]
+    },
+    {
+      "citation": "164.310(c)",
+      "rule": "security",
+      "category": "Physical Safeguards",
+      "title": "Workstation Security",
+      "type": "required",
+      "summary": "Implement physical safeguards for all workstations that access ePHI to restrict access to authorized users.",
+      "keywords": ["workstation security", "screen lock", "physical workstation safeguards"]
+    },
+    {
+      "citation": "164.310(d)(1)",
+      "rule": "security",
+      "category": "Physical Safeguards",
+      "title": "Device and Media Controls",
+      "type": "required",
+      "summary": "Implement policies and procedures that govern the receipt and removal of hardware and electronic media that contain ePHI into and out of a facility, and the movement of these items within the facility.",
+      "keywords": ["media controls", "device controls", "hardware movement", "portable media"]
+    },
+    {
+      "citation": "164.310(d)(2)(i)",
+      "rule": "security",
+      "category": "Physical Safeguards",
+      "title": "Media Disposal",
+      "type": "required",
+      "summary": "Implement policies and procedures to address the final disposition of ePHI and/or the hardware or electronic media on which it is stored.",
+      "keywords": ["disposal", "destruction", "shredding", "media disposition"]
+    },
+    {
+      "citation": "164.310(d)(2)(ii)",
+      "rule": "security",
+      "category": "Physical Safeguards",
+      "title": "Media Re-use",
+      "type": "required",
+      "summary": "Implement procedures for removal of ePHI from electronic media before the media are made available for re-use.",
+      "keywords": ["media reuse", "sanitization", "wiping", "data removal"]
+    },
+    {
+      "citation": "164.310(d)(2)(iii)",
+      "rule": "security",
+      "category": "Physical Safeguards",
+      "title": "Media Accountability",
+      "type": "addressable",
+      "summary": "Maintain a record of the movements of hardware and electronic media and any person responsible therefore.",
+      "keywords": ["media tracking", "asset inventory", "chain of custody"]
+    },
+    {
+      "citation": "164.310(d)(2)(iv)",
+      "rule": "security",
+      "category": "Physical Safeguards",
+      "title": "Data Backup and Storage (Before Movement)",
+      "type": "addressable",
+      "summary": "Create a retrievable, exact copy of ePHI, when needed, before movement of equipment.",
+      "keywords": ["backup before move", "equipment relocation"]
+    },
+    {
+      "citation": "164.312(a)(1)",
+      "rule": "security",
+      "category": "Technical Safeguards",
+      "title": "Access Control",
+      "type": "required",
+      "summary": "Implement technical policies and procedures for electronic information systems that maintain ePHI to allow access only to those persons or software programs that have been granted access rights.",
+      "keywords": ["access control", "technical access", "authorization"]
+    },
+    {
+      "citation": "164.312(a)(2)(i)",
+      "rule": "security",
+      "category": "Technical Safeguards",
+      "title": "Unique User Identification",
+      "type": "required",
+      "summary": "Assign a unique name and/or number for identifying and tracking user identity.",
+      "keywords": ["unique user ID", "user identification", "shared accounts", "no shared logins"]
+    },
+    {
+      "citation": "164.312(a)(2)(ii)",
+      "rule": "security",
+      "category": "Technical Safeguards",
+      "title": "Emergency Access Procedure",
+      "type": "required",
+      "summary": "Establish (and implement as needed) procedures for obtaining necessary ePHI during an emergency.",
+      "keywords": ["emergency access", "break-glass", "emergency procedures"]
+    },
+    {
+      "citation": "164.312(a)(2)(iii)",
+      "rule": "security",
+      "category": "Technical Safeguards",
+      "title": "Automatic Logoff",
+      "type": "addressable",
+      "summary": "Implement electronic procedures that terminate an electronic session after a predetermined time of inactivity.",
+      "keywords": ["automatic logoff", "session timeout", "inactivity timeout"]
+    },
+    {
+      "citation": "164.312(a)(2)(iv)",
+      "rule": "security",
+      "category": "Technical Safeguards",
+      "title": "Encryption and Decryption (At Rest)",
+      "type": "addressable",
+      "summary": "Implement a mechanism to encrypt and decrypt ePHI.",
+      "keywords": ["encryption at rest", "encrypt", "decrypt", "disk encryption"]
+    },
+    {
+      "citation": "164.312(b)",
+      "rule": "security",
+      "category": "Technical Safeguards",
+      "title": "Audit Controls",
+      "type": "required",
+      "summary": "Implement hardware, software, and/or procedural mechanisms that record and examine activity in information systems that contain or use ePHI.",
+      "keywords": ["audit controls", "audit trails", "logging", "activity recording"]
+    },
+    {
+      "citation": "164.312(c)(1)",
+      "rule": "security",
+      "category": "Technical Safeguards",
+      "title": "Integrity",
+      "type": "required",
+      "summary": "Implement policies and procedures to protect ePHI from improper alteration or destruction.",
+      "keywords": ["integrity", "data alteration", "data destruction"]
+    },
+    {
+      "citation": "164.312(c)(2)",
+      "rule": "security",
+      "category": "Technical Safeguards",
+      "title": "Mechanism to Authenticate ePHI",
+      "type": "addressable",
+      "summary": "Implement electronic mechanisms to corroborate that ePHI has not been altered or destroyed in an unauthorized manner.",
+      "keywords": ["data authentication", "checksums", "integrity verification"]
+    },
+    {
+      "citation": "164.312(d)",
+      "rule": "security",
+      "category": "Technical Safeguards",
+      "title": "Person or Entity Authentication",
+      "type": "required",
+      "summary": "Implement procedures to verify that a person or entity seeking access to ePHI is the one claimed.",
+      "keywords": ["authentication", "identity verification", "MFA", "multi-factor"]
+    },
+    {
+      "citation": "164.312(e)(1)",
+      "rule": "security",
+      "category": "Technical Safeguards",
+      "title": "Transmission Security",
+      "type": "required",
+      "summary": "Implement technical security measures to guard against unauthorized access to ePHI that is being transmitted over an electronic communications network.",
+      "keywords": ["transmission security", "network security", "data in transit"]
+    },
+    {
+      "citation": "164.312(e)(2)(i)",
+      "rule": "security",
+      "category": "Technical Safeguards",
+      "title": "Integrity Controls (In Transit)",
+      "type": "addressable",
+      "summary": "Implement security measures to ensure that electronically transmitted ePHI is not improperly modified without detection until disposed of.",
+      "keywords": ["transmission integrity", "in-transit integrity"]
+    },
+    {
+      "citation": "164.312(e)(2)(ii)",
+      "rule": "security",
+      "category": "Technical Safeguards",
+      "title": "Encryption (In Transit)",
+      "type": "addressable",
+      "summary": "Implement a mechanism to encrypt ePHI whenever deemed appropriate, particularly during transmission over open networks.",
+      "keywords": ["encryption in transit", "TLS", "secure email", "VPN"]
+    },
+    {
+      "citation": "164.314(a)(1)",
+      "rule": "security",
+      "category": "Organizational Requirements",
+      "title": "Business Associate Contracts (Content Requirements)",
+      "type": "required",
+      "summary": "The contract or other arrangement with a business associate must meet specified requirements: the BA must comply with the Security Rule, ensure subcontractors comply, and report security incidents including breaches of unsecured PHI.",
+      "keywords": ["BAA content", "business associate contract terms", "subcontractors"]
+    },
+    {
+      "citation": "164.316(a)",
+      "rule": "security",
+      "category": "Policies, Procedures and Documentation",
+      "title": "Policies and Procedures",
+      "type": "required",
+      "summary": "Implement reasonable and appropriate policies and procedures to comply with the standards, implementation specifications, and other requirements of the Security Rule; policies may be changed at any time provided changes are documented and implemented.",
+      "keywords": ["policies and procedures", "policy maintenance"]
+    },
+    {
+      "citation": "164.316(b)(1)",
+      "rule": "security",
+      "category": "Policies, Procedures and Documentation",
+      "title": "Documentation",
+      "type": "required",
+      "summary": "Maintain the policies and procedures in written (which may be electronic) form; and if an action, activity, or assessment is required to be documented, maintain a written record of it.",
+      "keywords": ["documentation", "written records", "recordkeeping"]
+    },
+    {
+      "citation": "164.316(b)(2)(i)",
+      "rule": "security",
+      "category": "Policies, Procedures and Documentation",
+      "title": "Documentation Retention (6 Years)",
+      "type": "required",
+      "summary": "Retain required documentation for 6 years from the date of its creation or the date when it last was in effect, whichever is later.",
+      "keywords": ["retention", "six years", "6 years", "record retention"]
+    },
+    {
+      "citation": "164.316(b)(2)(ii)",
+      "rule": "security",
+      "category": "Policies, Procedures and Documentation",
+      "title": "Documentation Availability",
+      "type": "required",
+      "summary": "Make documentation available to those persons responsible for implementing the procedures to which the documentation pertains.",
+      "keywords": ["documentation availability", "policy distribution"]
+    },
+    {
+      "citation": "164.316(b)(2)(iii)",
+      "rule": "security",
+      "category": "Policies, Procedures and Documentation",
+      "title": "Documentation Updates",
+      "type": "required",
+      "summary": "Review documentation periodically, and update as needed, in response to environmental or operational changes affecting the security of the ePHI.",
+      "keywords": ["policy review", "periodic update", "document review cycle"]
+    },
+    {
+      "citation": "164.502(a)",
+      "rule": "privacy",
+      "category": "Uses and Disclosures",
+      "title": "Permitted and Required Uses and Disclosures (General Rules)",
+      "type": "standard",
+      "summary": "A covered entity may not use or disclose PHI except as permitted or required by the Privacy Rule: to the individual, for treatment/payment/health care operations, with authorization, and in other specified circumstances. Disclosure is required to the individual on request and to HHS for compliance investigations.",
+      "keywords": ["permitted uses", "permitted disclosures", "use and disclosure", "PHI"]
+    },
+    {
+      "citation": "164.502(b)",
+      "rule": "privacy",
+      "category": "Uses and Disclosures",
+      "title": "Minimum Necessary Standard",
+      "type": "standard",
+      "summary": "When using or disclosing PHI or when requesting PHI from another covered entity, make reasonable efforts to limit PHI to the minimum necessary to accomplish the intended purpose. Does not apply to treatment disclosures, disclosures to the individual, authorized disclosures, or disclosures required by law.",
+      "keywords": ["minimum necessary", "least amount", "need to know"]
+    },
+    {
+      "citation": "164.502(e)",
+      "rule": "privacy",
+      "category": "Uses and Disclosures",
+      "title": "Disclosures to Business Associates (Privacy)",
+      "type": "standard",
+      "summary": "A covered entity may disclose PHI to a business associate and allow it to create, receive, maintain, or transmit PHI on its behalf only with satisfactory assurance (a business associate agreement) that the BA will appropriately safeguard the information.",
+      "keywords": ["business associate", "BAA", "vendor disclosures"]
+    },
+    {
+      "citation": "164.502(g)",
+      "rule": "privacy",
+      "category": "Uses and Disclosures",
+      "title": "Personal Representatives",
+      "type": "standard",
+      "summary": "Treat a personal representative (a person with authority to act on behalf of an individual, e.g., for minors or incapacitated adults) as the individual for purposes of the Privacy Rule, with exceptions for abuse or endangerment situations.",
+      "keywords": ["personal representative", "guardian", "parent", "power of attorney"]
+    },
+    {
+      "citation": "164.504(e)",
+      "rule": "privacy",
+      "category": "Organizational Requirements",
+      "title": "Business Associate Agreement Content (Privacy)",
+      "type": "required",
+      "summary": "Business associate contracts must establish permitted uses/disclosures, prohibit further impermissible use, require safeguards, require breach/incident reporting, ensure subcontractor compliance, provide for access/amendment/accounting support, and require return or destruction of PHI at termination.",
+      "keywords": ["BAA terms", "business associate contract", "subcontractor flow-down"]
+    },
+    {
+      "citation": "164.506",
+      "rule": "privacy",
+      "category": "Uses and Disclosures",
+      "title": "Uses and Disclosures for Treatment, Payment, and Health Care Operations (TPO)",
+      "type": "standard",
+      "summary": "A covered entity may use or disclose PHI for its own treatment, payment, or health care operations, and in specified circumstances for those of another covered entity, without individual authorization.",
+      "keywords": ["treatment", "payment", "health care operations", "TPO"]
+    },
+    {
+      "citation": "164.508",
+      "rule": "privacy",
+      "category": "Uses and Disclosures",
+      "title": "Authorizations for Uses and Disclosures",
+      "type": "standard",
+      "summary": "Uses and disclosures not otherwise permitted require a valid written authorization with core elements (description, who may disclose/receive, purpose, expiration, signature) and required statements (right to revoke, conditioning limits, redisclosure risk). Special rules for psychotherapy notes and marketing; sale of PHI requires authorization.",
+      "keywords": ["authorization", "written consent", "psychotherapy notes", "marketing", "sale of PHI", "revocation"]
+    },
+    {
+      "citation": "164.510(a)",
+      "rule": "privacy",
+      "category": "Uses and Disclosures",
+      "title": "Facility Directories",
+      "type": "standard",
+      "summary": "May use limited PHI (name, location, general condition, religious affiliation) in facility directories if the individual is informed and given an opportunity to object; emergency provisions apply.",
+      "keywords": ["facility directory", "patient directory", "opportunity to object"]
+    },
+    {
+      "citation": "164.510(b)",
+      "rule": "privacy",
+      "category": "Uses and Disclosures",
+      "title": "Disclosures to Family, Friends, and for Notification",
+      "type": "standard",
+      "summary": "May disclose PHI directly relevant to the involvement of a family member, relative, or close friend in the individual's care or payment, and for notification of location/condition/death, subject to the individual's agreement or, when incapacitated, professional judgment.",
+      "keywords": ["family", "friends", "caregivers", "notification", "involvement in care"]
+    },
+    {
+      "citation": "164.512",
+      "rule": "privacy",
+      "category": "Uses and Disclosures",
+      "title": "Uses and Disclosures Not Requiring Authorization or Opportunity to Object",
+      "type": "standard",
+      "summary": "Permits uses and disclosures without authorization for: as required by law; public health activities; victims of abuse/neglect/domestic violence; health oversight; judicial and administrative proceedings; law enforcement; decedents (coroners, funeral directors); organ donation; research (with waiver or other conditions); serious threat to health or safety; specialized government functions; and workers' compensation.",
+      "keywords": ["required by law", "public health", "law enforcement", "subpoena", "court order", "abuse reporting", "research", "coroner", "serious threat", "workers compensation"]
+    },
+    {
+      "citation": "164.514(a)-(c)",
+      "rule": "privacy",
+      "category": "Uses and Disclosures",
+      "title": "De-identification of PHI",
+      "type": "standard",
+      "summary": "Health information is not PHI if de-identified via expert determination or the safe harbor method (removal of 18 identifiers with no actual knowledge of re-identifiability); re-identification codes must be protected.",
+      "keywords": ["de-identification", "safe harbor", "18 identifiers", "expert determination", "re-identification"]
+    },
+    {
+      "citation": "164.514(d)",
+      "rule": "privacy",
+      "category": "Uses and Disclosures",
+      "title": "Minimum Necessary Implementation (Role-Based)",
+      "type": "standard",
+      "summary": "Identify workforce members or classes who need access to PHI to carry out their duties, the categories of PHI needed, and conditions appropriate to such access; implement policies limiting routine and non-routine disclosures and requests accordingly.",
+      "keywords": ["role-based access", "minimum necessary procedures", "access categories"]
+    },
+    {
+      "citation": "164.514(e)",
+      "rule": "privacy",
+      "category": "Uses and Disclosures",
+      "title": "Limited Data Sets and Data Use Agreements",
+      "type": "standard",
+      "summary": "May use or disclose a limited data set (with specified direct identifiers removed) for research, public health, or health care operations only with a data use agreement.",
+      "keywords": ["limited data set", "data use agreement", "DUA"]
+    },
+    {
+      "citation": "164.514(h)",
+      "rule": "privacy",
+      "category": "Uses and Disclosures",
+      "title": "Verification of Identity and Authority",
+      "type": "standard",
+      "summary": "Prior to disclosure, verify the identity of a person requesting PHI and the authority of the person to have access to it, if not known; obtain any required documentation, statements, or representations.",
+      "keywords": ["identity verification", "verify requestor", "authority verification"]
+    },
+    {
+      "citation": "164.520",
+      "rule": "privacy",
+      "category": "Individual Rights",
+      "title": "Notice of Privacy Practices (NPP)",
+      "type": "standard",
+      "summary": "Individuals have a right to adequate notice of the uses and disclosures of PHI that may be made and of their rights and the covered entity's legal duties. The notice must contain specified elements, be provided at first service delivery, be posted, be available on any website, and providers with direct treatment relationships must make a good-faith effort to obtain written acknowledgment of receipt.",
+      "keywords": ["notice of privacy practices", "NPP", "privacy notice", "acknowledgment"]
+    },
+    {
+      "citation": "164.522(a)",
+      "rule": "privacy",
+      "category": "Individual Rights",
+      "title": "Right to Request Restrictions",
+      "type": "standard",
+      "summary": "Individuals may request restrictions on uses and disclosures of PHI for TPO and to persons involved in care. The covered entity is not required to agree except it MUST agree to restrict disclosure to a health plan when the disclosure is for payment/operations and pertains to an item or service paid in full out of pocket.",
+      "keywords": ["restriction request", "self-pay restriction", "restrict disclosure"]
+    },
+    {
+      "citation": "164.522(b)",
+      "rule": "privacy",
+      "category": "Individual Rights",
+      "title": "Confidential Communications",
+      "type": "standard",
+      "summary": "Health care providers must permit individuals to request and must accommodate reasonable requests to receive communications of PHI by alternative means or at alternative locations.",
+      "keywords": ["confidential communications", "alternative means", "alternative location", "contact preferences"]
+    },
+    {
+      "citation": "164.524",
+      "rule": "privacy",
+      "category": "Individual Rights",
+      "title": "Right of Access to PHI",
+      "type": "standard",
+      "summary": "Individuals have a right to inspect and obtain a copy of their PHI in a designated record set, generally within 30 days (one 30-day extension permitted), in the form and format requested if readily producible (including electronic copies), with only a reasonable cost-based fee; limited grounds for denial, some reviewable.",
+      "keywords": ["right of access", "patient access", "medical records request", "30 days", "designated record set", "copy fees"]
+    },
+    {
+      "citation": "164.526",
+      "rule": "privacy",
+      "category": "Individual Rights",
+      "title": "Right to Amend PHI",
+      "type": "standard",
+      "summary": "Individuals have the right to have a covered entity amend PHI in a designated record set; the entity must act within 60 days (one 30-day extension), may deny on specified grounds, and must permit a statement of disagreement and provide the amendment or disagreement with future disclosures.",
+      "keywords": ["amendment", "amend records", "correction request", "statement of disagreement"]
+    },
+    {
+      "citation": "164.528",
+      "rule": "privacy",
+      "category": "Individual Rights",
+      "title": "Accounting of Disclosures",
+      "type": "standard",
+      "summary": "Individuals have a right to an accounting of disclosures of PHI made in the six years prior to the request, excluding TPO, to the individual, authorized, directory, and certain other disclosures; response within 60 days; first accounting in any 12-month period must be free.",
+      "keywords": ["accounting of disclosures", "disclosure log", "disclosure tracking"]
+    },
+    {
+      "citation": "164.530(a)",
+      "rule": "privacy",
+      "category": "Administrative Requirements",
+      "title": "Privacy Officer and Contact Person",
+      "type": "required",
+      "summary": "Designate a privacy official responsible for the development and implementation of privacy policies and procedures, and a contact person or office responsible for receiving complaints and providing information about the notice.",
+      "keywords": ["privacy officer", "privacy official", "contact person", "complaints contact"]
+    },
+    {
+      "citation": "164.530(b)",
+      "rule": "privacy",
+      "category": "Administrative Requirements",
+      "title": "Privacy Training",
+      "type": "required",
+      "summary": "Train all members of the workforce on privacy policies and procedures as necessary and appropriate for their functions: for new members within a reasonable time after joining, and after material changes to policies; document the training.",
+      "keywords": ["privacy training", "workforce training", "new hire training"]
+    },
+    {
+      "citation": "164.530(c)",
+      "rule": "privacy",
+      "category": "Administrative Requirements",
+      "title": "Safeguards (Privacy)",
+      "type": "required",
+      "summary": "Have in place appropriate administrative, technical, and physical safeguards to protect the privacy of PHI in any form (including oral and paper), reasonably safeguarding PHI from any intentional or unintentional use or disclosure in violation of the Privacy Rule and limiting incidental uses and disclosures.",
+      "keywords": ["privacy safeguards", "paper records", "oral privacy", "incidental disclosures"]
+    },
+    {
+      "citation": "164.530(d)",
+      "rule": "privacy",
+      "category": "Administrative Requirements",
+      "title": "Complaints Process",
+      "type": "required",
+      "summary": "Provide a process for individuals to make complaints concerning the covered entity's privacy policies and procedures or its compliance with them; document all complaints received and their disposition.",
+      "keywords": ["complaints", "grievance", "complaint process", "complaint documentation"]
+    },
+    {
+      "citation": "164.530(e)",
+      "rule": "privacy",
+      "category": "Administrative Requirements",
+      "title": "Sanctions (Privacy)",
+      "type": "required",
+      "summary": "Have and apply appropriate sanctions against members of the workforce who fail to comply with the privacy policies and procedures or the Privacy Rule; document sanctions applied.",
+      "keywords": ["privacy sanctions", "discipline", "workforce violations"]
+    },
+    {
+      "citation": "164.530(f)",
+      "rule": "privacy",
+      "category": "Administrative Requirements",
+      "title": "Mitigation",
+      "type": "required",
+      "summary": "Mitigate, to the extent practicable, any harmful effect known to the covered entity of a use or disclosure of PHI in violation of its policies or the Privacy Rule by the entity or its business associates.",
+      "keywords": ["mitigation", "harm reduction", "corrective measures"]
+    },
+    {
+      "citation": "164.530(g)",
+      "rule": "privacy",
+      "category": "Administrative Requirements",
+      "title": "Refraining from Intimidating or Retaliatory Acts",
+      "type": "required",
+      "summary": "May not intimidate, threaten, coerce, discriminate against, or take other retaliatory action against individuals for exercising their rights, filing complaints, participating in investigations, or opposing unlawful acts.",
+      "keywords": ["non-retaliation", "whistleblower", "retaliation prohibited"]
+    },
+    {
+      "citation": "164.530(h)",
+      "rule": "privacy",
+      "category": "Administrative Requirements",
+      "title": "No Waiver of Rights",
+      "type": "required",
+      "summary": "May not require individuals to waive their rights under the Privacy Rule or their right to file a complaint with HHS as a condition of treatment, payment, enrollment, or eligibility for benefits.",
+      "keywords": ["waiver of rights", "condition of treatment"]
+    },
+    {
+      "citation": "164.530(i)",
+      "rule": "privacy",
+      "category": "Administrative Requirements",
+      "title": "Privacy Policies and Procedures",
+      "type": "required",
+      "summary": "Implement policies and procedures with respect to PHI designed to comply with the Privacy Rule and Breach Notification Rule; change policies promptly to reflect changes in law; document and implement changes consistently with the notice.",
+      "keywords": ["privacy policies", "policy changes", "policy implementation"]
+    },
+    {
+      "citation": "164.530(j)",
+      "rule": "privacy",
+      "category": "Administrative Requirements",
+      "title": "Privacy Documentation and Retention",
+      "type": "required",
+      "summary": "Maintain privacy policies and procedures, communications, and required documentation in written or electronic form for 6 years from creation or last effective date, whichever is later.",
+      "keywords": ["privacy documentation", "6 year retention", "recordkeeping"]
+    },
+    {
+      "citation": "164.402",
+      "rule": "breach",
+      "category": "Breach Notification",
+      "title": "Breach Definition and Risk Assessment",
+      "type": "standard",
+      "summary": "An impermissible acquisition, access, use, or disclosure of unsecured PHI is presumed to be a breach unless the entity demonstrates a low probability of compromise via a documented risk assessment considering at least: nature and extent of PHI, the unauthorized person, whether PHI was actually acquired or viewed, and the extent of mitigation.",
+      "keywords": ["breach definition", "risk assessment", "four factors", "low probability of compromise", "unsecured PHI"]
+    },
+    {
+      "citation": "164.404",
+      "rule": "breach",
+      "category": "Breach Notification",
+      "title": "Notification to Individuals",
+      "type": "required",
+      "summary": "Following discovery of a breach of unsecured PHI, notify each affected individual without unreasonable delay and no later than 60 calendar days after discovery; written notice with specified content (what happened, types of information, steps individuals should take, what the entity is doing, contact procedures); substitute notice provisions when contact information is insufficient.",
+      "keywords": ["individual notification", "60 days", "breach notice content", "substitute notice"]
+    },
+    {
+      "citation": "164.406",
+      "rule": "breach",
+      "category": "Breach Notification",
+      "title": "Notification to the Media",
+      "type": "required",
+      "summary": "For a breach involving more than 500 residents of a state or jurisdiction, notify prominent media outlets serving that area without unreasonable delay and no later than 60 days after discovery.",
+      "keywords": ["media notification", "500 individuals", "press notice"]
+    },
+    {
+      "citation": "164.408",
+      "rule": "breach",
+      "category": "Breach Notification",
+      "title": "Notification to HHS",
+      "type": "required",
+      "summary": "Notify the Secretary of HHS of breaches of unsecured PHI: contemporaneously with individual notice for breaches involving 500 or more individuals; annually (within 60 days after calendar year end) for smaller breaches via a maintained log.",
+      "keywords": ["HHS notification", "secretary", "breach log", "annual reporting"]
+    },
+    {
+      "citation": "164.410",
+      "rule": "breach",
+      "category": "Breach Notification",
+      "title": "Notification by Business Associates",
+      "type": "required",
+      "summary": "A business associate must notify the covered entity of a breach of unsecured PHI without unreasonable delay and no later than 60 days after discovery, identifying affected individuals and providing available details.",
+      "keywords": ["BA breach notification", "business associate reporting"]
+    },
+    {
+      "citation": "164.414",
+      "rule": "breach",
+      "category": "Breach Notification",
+      "title": "Breach Administrative Requirements and Burden of Proof",
+      "type": "required",
+      "summary": "Comply with administrative requirements (training, complaints, sanctions, documentation) with respect to breach notification; the covered entity or BA bears the burden of demonstrating that required notifications were made or that the incident did not constitute a breach.",
+      "keywords": ["burden of proof", "breach documentation", "breach procedures"]
+    }
+  ]
+}
